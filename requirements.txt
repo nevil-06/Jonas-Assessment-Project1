@@ -1,0 +1,6 @@
+pandas
+faiss-cpu
+openai
+langchain
+sentence-transformers
+transformers
