@@ -1,5 +1,4 @@
-# rag_agent.py
-
+# rag_agent.p
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -30,15 +29,34 @@ def format_docs(docs):
     return "\n\n".join(doc.page_content for doc in docs)
 
 # Define custom summarization chain
+# chain = (
+#     RunnableLambda(lambda query: {"query": query, "documents": format_docs(retriever.invoke(query))})
+#     | prompt_template
+#     | llm
+# )
+
+# def answer_query(query: str):
+#     """Return a summary and the retrieved documents."""
+#     docs = retriever.invoke(query)
+#     docs = docs[:3]
+#     summary = chain.invoke(query)
+#     return summary.content, docs
+
+
+# # rag_agent.py
+
+# ...
+
+retriever = get_hybrid_retriever()  # returns a lambda that takes query → documents
+...
 chain = (
-    RunnableLambda(lambda query: {"query": query, "documents": format_docs(retriever.invoke(query))})
+    RunnableLambda(lambda query: {"query": query, "documents": format_docs(retriever(query))})
     | prompt_template
     | llm
 )
 
 def answer_query(query: str):
-    """Return a summary and the retrieved documents."""
-    docs = retriever.invoke(query)
-    docs = docs[:3]
+    docs = retriever(query)
+    docs = docs[:3]  # Safety limit
     summary = chain.invoke(query)
     return summary.content, docs
