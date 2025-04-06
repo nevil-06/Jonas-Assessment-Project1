@@ -1,7 +1,7 @@
 # main.py
 
 from agent_router import route_request
-from ner import extract_named_entities
+from ner_utils import extract_named_entities
 
 
 def main():
