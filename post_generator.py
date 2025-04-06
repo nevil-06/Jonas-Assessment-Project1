@@ -10,7 +10,8 @@ load_dotenv()
 llm = ChatOpenAI(model_name="gpt-3.5-turbo-0125", temperature=0.2)
 
 # Prompt template for LinkedIn post
-post_prompt = ChatPromptTemplate.from_template("""
+post_prompt = ChatPromptTemplate.from_template(
+    """
 You are an experienced LinkedIn content strategist.
 
 Your task is to write a **professional, concise, and engaging LinkedIn post** based on the following news content:
@@ -30,7 +31,9 @@ Instructions:
 - Return only the final post content. No explanations, labels, or headings.
 
 Output:
-""")
+"""
+)
+
 
 def generate_linkedin_post(news_content: str) -> str:
     prompt = post_prompt.format_messages(news_content=news_content)

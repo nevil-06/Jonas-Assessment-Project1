@@ -1,4 +1,5 @@
 from dotenv import load_dotenv
+
 load_dotenv()
 
 import requests
@@ -16,7 +17,8 @@ llm = ChatOpenAI(model_name="gpt-3.5-turbo-0125", temperature=0.2)
 enc = tiktoken.encoding_for_model("gpt-3.5-turbo")
 
 # === Prompt Template ===
-prompt_template = ChatPromptTemplate.from_template("""
+prompt_template = ChatPromptTemplate.from_template(
+    """
 You are a smart assistant that reads news articles and returns a short summary relevant to a user query.
 
 Task:
@@ -30,10 +32,12 @@ Articles:
 {documents}
 
 Summary:
-""")
+"""
+)
 
 # === Caching for article scraping ===
 ARTICLE_CACHE = {}
+
 
 def extract_article_text(link):
     if link in ARTICLE_CACHE:
@@ -54,12 +58,14 @@ def extract_article_text(link):
     ARTICLE_CACHE[link] = None
     return None
 
+
 # === Token Trimming ===
 def trim_to_tokens(text, max_tokens=500):
     tokens = enc.encode(text)
     if len(tokens) > max_tokens:
         return enc.decode(tokens[:max_tokens])
     return text
+
 
 # === Document Formatter ===
 def format_docs(docs):
@@ -82,19 +88,21 @@ def format_docs(docs):
         content = trim_to_tokens(content, max_tokens=500)
 
         formatted.append(
-            f"Headline: {headline}\n"
-            f"Content: {content}\n"
-            f"Link: {link}"
+            f"Headline: {headline}\n" f"Content: {content}\n" f"Link: {link}"
         )
 
     return "\n\n".join(formatted)
 
+
 # === RAG Chain ===
 chain = (
-    RunnableLambda(lambda query: {"query": query, "documents": format_docs(retriever(query)[:2])})
+    RunnableLambda(
+        lambda query: {"query": query, "documents": format_docs(retriever(query)[:2])}
+    )
     | prompt_template
     | llm
 )
+
 
 def answer_query(query: str):
     docs = retriever(query)[:2]

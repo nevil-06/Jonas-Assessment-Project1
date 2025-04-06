@@ -20,14 +20,14 @@ df = pd.read_csv(DATA_FILE)
 retrieval_prefix = "Represent this sentence for retrieval: "
 docs = [
     Document(
-        page_content=retrieval_prefix + row['text'],
+        page_content=retrieval_prefix + row["text"],
         metadata={
             "id": row["id"],
             "category": row["category"],
             "headline": row["headline"],
             "short_description": row["short_description"],
-            "link": row["link"]
-        }
+            "link": row["link"],
+        },
     )
     for _, row in df.iterrows()
 ]

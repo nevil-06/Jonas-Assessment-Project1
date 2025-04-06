@@ -80,7 +80,6 @@
 #     return lambda query: custom_hybrid_retrieve(query)
 
 
-
 import pandas as pd
 from langchain_community.retrievers import BM25Retriever
 from langchain.docstore.document import Document
@@ -102,20 +101,25 @@ documents = [
             "category": row["category"],
             "headline": row["headline"],
             "short_description": row["short_description"],
-            "link": row["link"]
-        }
+            "link": row["link"],
+        },
     )
     for _, row in df.iterrows()
 ]
 bm25 = BM25Retriever.from_documents(documents)
 bm25.k = 5  # Smaller top-k for speed
 
+
 def boost_named_entities(query, docs):
     """
     Boost documents that contain key entities from the query.
     """
     relevant_labels = ("GPE", "ORG", "PERSON", "EVENT", "DATE", "NORP", "LOC")
-    entities = [ent.lower() for ent, label in extract_named_entities(query) if label in relevant_labels]
+    entities = [
+        ent.lower()
+        for ent, label in extract_named_entities(query)
+        if label in relevant_labels
+    ]
 
     boosted = []
     for doc in docs:
@@ -126,11 +130,13 @@ def boost_named_entities(query, docs):
 
     return boosted
 
+
 def rerank_with_crossencoder(query, docs, top_n=3):
     pairs = [[query, doc.page_content] for doc in docs]
     scores = cross_encoder.predict(pairs)
     scored_docs = sorted(zip(docs, scores), key=lambda x: x[1], reverse=True)
     return [doc for doc, _ in scored_docs[:top_n]]
+
 
 def custom_hybrid_retrieve(query, k=3, bm25_weight=0.4, semantic_weight=0.6):
     # Retrieve from both BM25 and FAISS
@@ -157,6 +163,7 @@ def custom_hybrid_retrieve(query, k=3, bm25_weight=0.4, semantic_weight=0.6):
 
     # Final rerank with CrossEncoder
     return rerank_with_crossencoder(query, boosted, top_n=k)
+
 
 def get_hybrid_retriever():
     return lambda query: custom_hybrid_retrieve(query)
