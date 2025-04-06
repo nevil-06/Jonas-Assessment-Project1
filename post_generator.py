@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Initialize OpenAI LLM
-llm = ChatOpenAI(model_name="gpt-3.5-turbo-0125", temperature=0.3)
+llm = ChatOpenAI(model_name="gpt-3.5-turbo-0125", temperature=0.2)
 
 # Prompt template for LinkedIn post
 post_prompt = ChatPromptTemplate.from_template("""

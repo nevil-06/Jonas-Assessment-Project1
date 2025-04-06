@@ -113,7 +113,7 @@ from hybrid_retriever import get_hybrid_retriever
 
 # Load retriever and LLM
 retriever = get_hybrid_retriever()
-llm = ChatOpenAI(model_name="gpt-3.5-turbo-0125", temperature=0.3)
+llm = ChatOpenAI(model_name="gpt-3.5-turbo-0125", temperature=0.2)
 
 # Improved summarization prompt
 prompt_template = ChatPromptTemplate.from_template("""
