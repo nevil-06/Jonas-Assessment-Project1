@@ -24,7 +24,7 @@ You are a smart assistant that reads news articles and returns a short summary r
 Task:
 - ONLY summarize content highly relevant to this query: "{query}".
 - Ignore or skip articles that are not relevant.
-- Make the summary concise and useful (max 100 words).
+- Make the summary concise and useful (max 150 words).
 - Do NOT repeat information across articles.
 - Write in a neutral, informative tone.
 
