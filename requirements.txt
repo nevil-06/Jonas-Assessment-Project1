@@ -13,3 +13,4 @@ spacy
 requests
 beautifulsoup4
 tiktoken
+streamlit
