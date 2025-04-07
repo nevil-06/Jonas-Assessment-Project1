@@ -105,6 +105,6 @@ chain = (
 
 
 def answer_query(query: str):
-    docs = retriever(query)[:2]
+    docs = retriever(query)[:3]
     summary = chain.invoke(query)
     return summary.content.strip(), docs
