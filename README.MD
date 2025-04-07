@@ -6,8 +6,12 @@ Absolutely! Here's your complete `README.md` content in standard Markdown format
 # 📰 News Article RAG System with LinkedIn Post Generator
 
 A Retrieval-Augmented Generation (RAG) system designed to answer queries using news articles from the [Kaggle News Category Dataset](https://www.kaggle.com/datasets/rmisra/news-category-dataset), and generate professional LinkedIn posts based on user queries or article content.
-
+```
 ---
+## 🧠 Architecture Overview
+
+![Architecture](SYSTEM_ARCH.png)
+![Architecture](project1agentflow.png)
 
 ## 🚀 Features
 
