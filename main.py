@@ -1,15 +1,17 @@
 # main.py
 
 from agent_router import route_request
-from ner import extract_named_entities
+from ner_utils import extract_named_entities
 
 
 def main():
     print("📰 Welcome to the News RAG + LinkedIn Post Generator 🚀")
-    
+
     while True:
         print("\nChoose an option:")
-        print("1. Ask about a news topic (retrieves articles + generates LinkedIn post)")
+        print(
+            "1. Ask about a news topic (retrieves articles + generates LinkedIn post)"
+        )
         print("2. Generate LinkedIn post from your own content")
         print("3. Ask about a news topic (retrieves articles only)")
         print("0. Exit")
@@ -26,7 +28,9 @@ def main():
                 print("⚠️ Please enter a valid query.")
                 continue
 
-            result = route_request(query, generate_post_only=False, generate_post_from_retrieval=True)
+            result = route_request(
+                query, generate_post_only=False, generate_post_from_retrieval=True
+            )
 
             print("\n🧠 News Summary:\n", result["rag_answer"])
             print("\n🔗 Source Headlines:")
@@ -35,7 +39,7 @@ def main():
                 category = doc.metadata.get("category", "N/A")
                 link = doc.metadata.get("link", "[No Link]")
                 print(f" - {headline} [{category}]\n   🔗 {link}")
-            
+
             print("\n🧠 Named Entities from Summary:")
             entities = extract_named_entities(result["rag_answer"])
             for text, label in entities:
@@ -57,7 +61,9 @@ def main():
                 print("⚠️ Please enter a valid query.")
                 continue
 
-            result = route_request(query, generate_post_only=False, generate_post_from_retrieval=False)
+            result = route_request(
+                query, generate_post_only=False, generate_post_from_retrieval=False
+            )
 
             print("\n🧠 News Summary:\n", result["rag_answer"])
             print("\n🔗 Source Headlines:")
@@ -70,5 +76,7 @@ def main():
         else:
             print("❌ Invalid choice. Please select 0, 1, 2, or 3.")
 
+
 if __name__ == "__main__":
     main()
+

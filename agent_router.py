@@ -3,14 +3,19 @@
 from rag_agent import answer_query
 from post_generator import generate_linkedin_post
 
-def route_request(user_input: str, generate_post_only: bool = False, generate_post_from_retrieval: bool = True):
+
+def route_request(
+    user_input: str,
+    generate_post_only: bool = False,
+    generate_post_from_retrieval: bool = True,
+):
     """
     Routes user input to the correct agent:
     - If generate_post_only: direct content → Agent 3
     - If not, and generate_post_from_retrieval: query → Agent 2 → Agent 3
     - If not, and no post needed: query → Agent 2 only
     """
-    
+
     if generate_post_only:
         print("🧭 Routing to Agent 3: LinkedIn Post Generator")
         post = generate_linkedin_post(user_input)
@@ -29,11 +34,7 @@ def route_request(user_input: str, generate_post_only: bool = False, generate_po
                 "type": "rag_and_post",
                 "rag_answer": answer,
                 "linkedin_post": post,
-                "sources": sources
+                "sources": sources,
             }
         else:
-            return {
-                "type": "rag_only",
-                "rag_answer": answer,
-                "sources": sources
-            }
+            return {"type": "rag_only", "rag_answer": answer, "sources": sources}
