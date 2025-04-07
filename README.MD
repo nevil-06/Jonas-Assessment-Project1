@@ -69,8 +69,8 @@ project-root/
 
 ### ✅ 1. Clone the repository
 ```bash
-git clone https://github.com/your-username/news-rag-system.git
-cd news-rag-system
+git clone https://github.com/nevil-06/Jonas-Assessment-Project1
+cd Jonas-Assessment-Project1
 ```
 
 ### ✅ 2. Create a virtual environment
@@ -98,9 +98,55 @@ python retrievers/build_vector_store.py
 ```
 
 ### ✅ 6. Run the app
+🚀 How to Run the App
+You have 3 ways to run the system depending on your preference:
+
+### Option 1: Run Full Bootstrap Script (Recommended)
+Runs:
+
+spaCy model download
+
+Data preprocessing
+
+FAISS index creation
+
+Then asks you if you want to run the CLI or UI
+
 ```bash
+
+python start.py
+```
+📁 start.py handles everything automatically and ensures nothing is re-run unnecessarily if already complete.
+
+### Option 1: Launch the Streamlit UI
+```bash
+
+streamlit run streamlit_app.py
+```
+Interactive web interface
+
+Three buttons:
+
+Ask about news
+
+Generate LinkedIn post
+
+Smart Route (Agent 1 → Agent 2 → Agent 3)
+
+💡 Best for presentations or non-technical users!
+
+NOTE: WHEN YOU RUN THIS COMMAND IT WILL TAKE FEW SECONDS FOR THE ALL THE MODELS TO LOAD AND THEN UI APPEARS
+
+### Option 2: Run the Command-Line App (CLI)
+```bash
+
 python main.py
 ```
+Select between asking for news, generating a post, or both
+
+Best for quick testing and terminal-based workflows
+
+
 
 ---
 
