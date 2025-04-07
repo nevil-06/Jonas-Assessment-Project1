@@ -85,14 +85,14 @@ pip install -r requirements.txt
 python -m spacy download en_core_web_sm
 ```
 
-### ✅ 4. Prepare the data
+### ✅ 4. Prepare the data (skip for now)
 Ensure `News_Category_Dataset_v2.json` is available.
 Run preprocessing:
 ```bash
 python data/data_preprocessing.py
 ```
 
-### ✅ 5. Build the FAISS vector index
+### ✅ 5. Build the FAISS vector index (skip for now)
 ```bash
 python retrievers/build_vector_store.py
 ```
