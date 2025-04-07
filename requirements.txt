@@ -14,3 +14,4 @@ requests
 beautifulsoup4
 tiktoken
 streamlit
+rank_bm25
